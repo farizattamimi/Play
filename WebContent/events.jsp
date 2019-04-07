@@ -19,7 +19,7 @@
 		// check if logged in
 	%> 
 </head>
-<body>
+<body onload="loadEvents()">
 	<div class="container-fluid p-0 d-flex flex-column h-100">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	       	<a class="navbar-brand font-weight-bold" href="index.jsp">Play</a>
@@ -65,6 +65,25 @@
 	<script src="bootstrap/bootstrap.bundle.min.js"></script>
 	<script>
 			var map;
+			function loadEvents() {
+				$
+						.ajax({
+							url : "EventsServlet",
+							data : {
+								
+							},
+							success : function(result) {
+								console.log(result);
+								if (result === "") {
+									window.location.href = "index.jsp";
+								} else {
+									document.getElementById('errorMessage').innerHTML = result;
+									return false;
+								}
+							}
+						})
+			}
+			
 			function initMap() {
 				var myLatLng = {
 					lat : 38.6446543,
@@ -75,18 +94,20 @@
 					center : myLatLng,
 					zoom : 4
 				});
-				ArrayList <Event> newEvents = DatabaseConnector.getEvents();
+				//ArrayList <Event> newEvents = DatabaseConnector.getEvents();
+				/*
 				for(var i = 0; i < newEvents.size(); i++){
 					var latitude = newEvents[i].getLatitude();
 					var longitude = newEvents[i].getLongitude();
 					var tempLatLng = {
 							lat: latitude,
 							lng: longitude
-						}; 
+						};
+					*/
 					var marker = new google.maps.Marker({
 						position: myLatLng,
 						map: map});
-				}
+				//}
 			} 
 	</script>
 	<script
