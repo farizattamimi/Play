@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class DatabaseConnector {
-	private static final String DB_URL = "jdbc:mysql://localhost/play?user=root&password=root";
+	private static final String DB_URL = "jdbc:mysql://localhost/play?user=root&password=Jumble52";
 		
 	public static User login(String username, String password) {
 		Connection conn = null;

@@ -17,20 +17,7 @@
 	<%
 		boolean loggedIn = false;
 		// check if logged in
-	%>
-	
-	<script type="text/javascript">
-		function addMarker() {
-			 google.maps.event.addListener(map, 'click', function(event) {
-					var latitude = event.latLng.lat();
-			        var longitude = event.latLng.lng();
-					  	document.getElementById("LatitudeSearch").value = latitude;
-					  	document.getElementById("LongitudeSearch").value = longitude;
-					  	 addMarker(event.latLng, map);
-		           
-		        });
-		}
-	</script>
+	%> 
 </head>
 <body>
 	<div class="container-fluid p-0 d-flex flex-column h-100">
@@ -77,23 +64,30 @@
 	<script src="jquery/jquery-3.3.1.min.js"></script>
 	<script src="bootstrap/bootstrap.bundle.min.js"></script>
 	<script>
-		var map;
-		function initMap() {
-			var myLatLng = {
-				lat : 38.6446543,
-				lng : -106.3467908
-			};
-
-			map = new google.maps.Map(document.getElementById('map'), {
-				center : myLatLng,
-				zoom : 4
-			});
-			for(var i = 0; i < events.size(); i++){
-				var marker = new google.maps.Marker({
-					position: myLatLng, 
-					map: map});
-			}
-		}
+			var map;
+			function initMap() {
+				var myLatLng = {
+					lat : 38.6446543,
+					lng : -106.3467908
+				};
+	
+				map = new google.maps.Map(document.getElementById('map'), {
+					center : myLatLng,
+					zoom : 4
+				});
+				ArrayList <Event> newEvents = DatabaseConnector.getEvents();
+				for(var i = 0; i < newEvents.size(); i++){
+					var latitude = newEvents[i].getLatitude();
+					var longitude = newEvents[i].getLongitude();
+					var tempLatLng = {
+							lat: latitude,
+							lng: longitude
+						}; 
+					var marker = new google.maps.Marker({
+						position: myLatLng,
+						map: map});
+				}
+			} 
 	</script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjj3ad8bc8Fh1K_d3khuBu_3AbOc_mW0&callback=initMap"
