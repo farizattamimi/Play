@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mysql.cj.xdevapi.JsonArray;
 
 import classes.DatabaseConnector;
@@ -37,6 +38,8 @@ public class EventsServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		ArrayList<Event> events = DatabaseConnector.getEvents();
+		
+		Gson gson = new Gson();
 		
 		//JsonArray jsonEvents = new JsonArray(events);
 	}
