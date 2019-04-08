@@ -13,7 +13,7 @@ public class Event {
 	private Date createdAt;
 	private int upvotes;
 	private String description;
-	private Date expirationDate;
+	private Timestamp expirationDate;
 	private String website;
 	private ArrayList<Comment> comments;
 	

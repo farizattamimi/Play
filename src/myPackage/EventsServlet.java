@@ -1,17 +1,14 @@
 package myPackage;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-import com.mysql.cj.xdevapi.JsonArray;
-
 import classes.DatabaseConnector;
 import classes.Event;
 
@@ -33,15 +30,18 @@ public class EventsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		DatabaseConnector.createEvent("Felix", 3, "34.027502", "-118.284466", "Tennis", new Timestamp(2019-1900, 11, 10, 12, 50, 0, 0), "test.com");
+		
 		ArrayList<Event> events = DatabaseConnector.getEvents();
 		
-		Gson gson = new Gson();
+		String json = new Gson().toJson(events);
 		
-		//JsonArray jsonEvents = new JsonArray(events);
+		response.getWriter().write(json);
 	}
 
 	/**

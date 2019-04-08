@@ -57,6 +57,7 @@
 	   			</ul>
 			</div>
 	   	</nav>
+	   	<p id="errorMessage">&nbsp;</p>
 	
 		<div id="map" class="flex-grow-1"></div>
 	</div>
@@ -65,6 +66,8 @@
 	<script src="bootstrap/bootstrap.bundle.min.js"></script>
 	<script>
 			var map;
+			var JSONString;
+			var events;
 			function loadEvents() {
 				$
 						.ajax({
@@ -75,9 +78,34 @@
 							success : function(result) {
 								console.log(result);
 								if (result === "") {
-									window.location.href = "index.jsp";
+									//window.location.href = "index.jsp";
 								} else {
-									document.getElementById('errorMessage').innerHTML = result;
+									JSONString = result;
+									events = JSON.parse(JSONString);
+									document.getElementById('errorMessage').innerHTML = events;
+									
+									var myLatLng = {
+											lat : 38.6446543,
+											lng : -106.3467908
+										};
+							
+										map = new google.maps.Map(document.getElementById('map'), {
+											center : myLatLng,
+											zoom : 4
+										});
+											for (var i = 0; i < events.length; i++) {
+										        //Do something
+										        
+										        var myLatLng = {
+													lat : events[i].latitude,
+													lng : events[i].longitude
+												};
+										        
+												var marker = new google.maps.Marker({
+													position: myLatLng,
+													map: map});
+										    }
+										//}
 									return false;
 								}
 							}
@@ -85,29 +113,7 @@
 			}
 			
 			function initMap() {
-				var myLatLng = {
-					lat : 38.6446543,
-					lng : -106.3467908
-				};
-	
-				map = new google.maps.Map(document.getElementById('map'), {
-					center : myLatLng,
-					zoom : 4
-				});
-				//ArrayList <Event> newEvents = DatabaseConnector.getEvents();
-				/*
-				for(var i = 0; i < newEvents.size(); i++){
-					var latitude = newEvents[i].getLatitude();
-					var longitude = newEvents[i].getLongitude();
-					var tempLatLng = {
-							lat: latitude,
-							lng: longitude
-						};
-					*/
-					var marker = new google.maps.Marker({
-						position: myLatLng,
-						map: map});
-				//}
+				
 			} 
 	</script>
 	<script
