@@ -57,7 +57,6 @@
 	   			</ul>
 			</div>
 	   	</nav>
-	   	<p id="errorMessage">&nbsp;</p>
 	
 		<div id="map" class="flex-grow-1"></div>
 	</div>
@@ -78,11 +77,11 @@
 							success : function(result) {
 								console.log(result);
 								if (result === "") {
-									//window.location.href = "index.jsp";
+
 								} else {
 									JSONString = result;
 									events = JSON.parse(JSONString);
-									document.getElementById('errorMessage').innerHTML = events;
+									//document.getElementById('errorMessage').innerHTML = events;
 									
 									var myLatLng = {
 											lat : 38.6446543,
@@ -103,9 +102,11 @@
 										        
 												var marker = new google.maps.Marker({
 													position: myLatLng,
-													map: map});
+													map: map,
+													
+													store_id: events[i].eventID
+												});
 										    }
-										//}
 									return false;
 								}
 							}

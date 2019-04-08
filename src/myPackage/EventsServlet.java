@@ -35,7 +35,7 @@ public class EventsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		DatabaseConnector.createEvent("Felix", 3, "34.027502", "-118.284466", "Tennis", new Timestamp(2019-1900, 11, 10, 12, 50, 0, 0), "test.com");
+		//DatabaseConnector.createEvent("Felix", 3, "34.027502", "-118.284466", "Tennis", new Timestamp(2019-1900, 11, 10, 12, 50, 0, 0), "test.com");
 		
 		ArrayList<Event> events = DatabaseConnector.getEvents();
 		
